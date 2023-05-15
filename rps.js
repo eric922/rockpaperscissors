@@ -13,24 +13,59 @@ function getComputerChoice(){
     return choice
 }
 function playRound(playerSelection, computerSelection){
+    let message 
+    let winner
     if(playerSelection == computerSelection){
-        console.log("This round is a tie")
+        message = "This round is a tie"
+        winner = "tie"
+        console.log(message)
     }
     else if(playerSelection == 'rock' && computerSelection == "paper"){
-        console.log("You chose rock and the computer chose paper. You lose")
+        message = "You chose rock and the computer chose paper. You lose"
+        winner = "computer"
+        console.log(message)
     }
     else if(playerSelection == "paper" && computerSelection == "scissors"){
-        console.log("You chose paper and the computer chose scissors. You lose")
+        message = "You chose paper and the computer chose scissors. You lose"
+        winner = "computer"
+        console.log(message)
+        
     }
     else if(playerSelection == "scissors" && computerSelection == "rock"){
-        console.log("You chose scissors and the computer chose rock. You lose")
+        message = "You chose scissors and the computer chose rock. You lose"
+        winner = "computer"
+        console.log(message)
+        
     }
     else{
-        console.log("You win!")
+        message = "You win! " + playerSelection + " beats " + computerSelection
+        console.log(message)
+        winner = "player";
+        
     }
+    return winner
 }
-ComputerChoice = getComputerChoice();
-playerChoice = prompt("Please enter your selection").toLowerCase()
-console.log(playerChoice)
-console.log(ComputerChoice);
-playRound(playerChoice, ComputerChoice)
+
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+    tie = 0;
+    for(let i = 1; i < 6; i++){
+    ComputerChoice = getComputerChoice();
+    playerChoice = prompt("Please enter your selection").toLowerCase()
+    let result = playRound(playerChoice, ComputerChoice)
+    if(result == "computer"){
+        computerScore++
+    }
+    else if(result == "player"){
+        playerScore++
+    }
+    else{
+        tie++
+    }
+
+    }
+    console.log("The computer won " + computerScore + " rounds. " + "You won " + playerScore + " rounds. There were " + tie +" ties")
+}
+
+game()
